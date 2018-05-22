@@ -1,0 +1,14 @@
+// first step: orbit around a planet
+
+SET_RADIUS(radius) <=> (r = radius) & [](r' = 0).	// radius 'r' is a constant
+SET_MASS(mass) <=> (m = mass) & [](m' = 0).   		// mass 'm' is a constant
+
+INIT_POSITION <=> (x = r  &  y = 0).
+ORBIT_VEL(omega) <=> [](x'- = -(omega)*x-  &  y'- = -(omega)*y-).
+ORBIT_ACC <=> [](x''- = m*((x')^2)/r  &  y''- = m*((y')^2)/r).
+
+SET_RADIUS(10),
+SET_MASS(3),
+INIT_POSITION,
+ORBIT_VEL(3.14/6),
+ORBIT_ACC.
