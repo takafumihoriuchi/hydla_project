@@ -1,0 +1,12 @@
+// hypocycloid
+
+INIT <=> time1=0 & y=0 & x=1.
+
+TIME <=> []( time1'=1 ).
+
+Y <=> []( y= 4/5*sin(time1)-1/5*sin(4*time1) ).
+
+X <=> []( x= 4/5*cos(time1)+1/5*cos(4*time1) ).
+
+
+INIT,TIME,Y,X.
