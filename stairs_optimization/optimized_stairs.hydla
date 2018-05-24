@@ -1,0 +1,30 @@
+// Stairs (optimized)
+
+MID_AIR   <=> air = 1.
+AIR_CONST <=> [](air' = 0).
+
+INIT_X <=> x = 0  & x' = 4.
+INIT_Y <=> 13 <= y <= 15 & y' = 0.
+
+X_MOVE <=> [](x'' = 0).
+FALL   <=> [](y'' = -10).
+
+GROUND <=> [](y- = 0  =>  y' = -9/10 * y'-).
+STEP_HOR(left, right, height) <=> []( air- = 0
+	              	      	    & y- = height
+		 		    & left <= x- <= right
+		 		    => y' = -9/10 * y'-).
+
+WALL   <=> [](x- = 12 | x- = 0  =>  x' = -x'-).
+STEP_VER(bottom, top, location) <=> []( air- = 0
+	       	      		      & bottom <= y- <= top
+				      & x- = location
+				      => x' = -x'-).
+
+ABOVE_LINE <=> [](y- >= -x- + 12  &  air- = 0  =>  air = 1).
+BELOW_LINE <=> [](y- <= -x- + 12  &  air- = 1  =>  air = 0).
+
+INIT_X, INIT_Y, MID_AIR,
+(AIR_CONST << (ABOVE_LINE, BELOW_LINE)),
+(X_MOVE << (WALL, STEP_VER(6, 9, 3), STEP_VER(3, 6, 6), STEP_VER(0, 3, 9))),
+(FALL << (GROUND, STEP_HOR(0, 3, 9), STEP_HOR(3, 6, 6), STEP_HOR(6, 9, 3))).

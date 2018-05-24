@@ -1,0 +1,9 @@
+TIMER <=> (time = 0) & [](time' = 1).
+
+SET_RADIUS(radius) <=> (r = radius)& [](r' = 0).
+
+INIT_POSITION <=> [](x = r*cos(time) & y = r*sin(time)).
+
+TIMER,
+SET_RADIUS(10),
+INIT_POSITION.
