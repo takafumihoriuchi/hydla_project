@@ -1,23 +1,35 @@
 // step 1 : constant speed circular motion
 // step 2 : orbit around a planet with acceleration
+// step 3 : orbit the earth with real values
 
 TIMER <=> (time = 0) & [](time' = 1).
 
-SET_RADIUS(radius) <=> (r = radius) & [](r' = 0).
-SET_MASS(mass)     <=> (m = mass)   & [](m' = 0).
-SET_OMEGA(omega)   <=> (w = omega)  & [](w' = 0).
+SET_GRAVITY(gravity) <=> (g = gravity) & [](g' = 0).
+SET_RADIUS(radius)   <=> (r = radius) & [](r' = 0).
+SET_ALTITUDE(height) <=> (h = height) & [](h' = 0).
+SET_MASS(mass)       <=> (m = mass)   & [](m' = 0).
+SET_OMEGA(omega)     <=> (w = omega)  & [](w' = 0).
 
 UPDATE_THETA(phase) <=> [](theta = w * time + phase) & (theta' = 0).
 
+// INIT_POSITION <=> (x = r*cos(theta)  &  y = r*sin(theta)).
+// INIT_VELOCITY <=> (x' = -r*w*sin(theta)  &  y' = r*w*cos(theta)).
+ORBIT_ACC     <=> [](x'' = -r*(w^2)*cos(theta) & y'' = -r*(w^2)*sin(theta)).
+
 INIT_POSITION <=> (x = r*cos(theta)  &  y = r*sin(theta)).
 INIT_VELOCITY <=> (x' = -r*w*sin(theta)  &  y' = r*w*cos(theta)).
-ORBIT_ACC     <=> [](x''= -r*(w^2)*cos(theta) & y'' = -r*(w^2)*sin(theta)).
+// ORBIT_ACC     <=> [](x'' = ((x'-)^2)/(r+h) & y'' = ((y'-)^2)/(r+h)).
+
+// INJECTION <=> [](x'- = 0 & y'- < 0 => x'' = 0 & y'' = 0).
 
 TIMER,
-SET_RADIUS(10),	     	       	// radius 'r' = 10
-SET_MASS(3),			// mass   'm' = 3
+SET_GRAVITY(9.8),		// gravity of earth 'g' = 9.8 (m/s^2)
+SET_RADIUS(6.4 * 10^6),	     	// radius of earth 'r' = 6.4 * 10^6 (m)
+SET_ALTITUDE(0),  	 	// altitude of satellite 'h' = 0 (m)
+SET_MASS(3),			// mass of satellite 'm' = 3
 SET_OMEGA(3.14 * 2 / 4),	// frequency 'w'; period 'T' = 4
 UPDATE_THETA(0),
 INIT_POSITION,
 INIT_VELOCITY,
 ORBIT_ACC.
+// (ORBIT_ACC << INJECTION).
