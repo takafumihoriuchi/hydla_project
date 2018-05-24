@@ -1,0 +1,18 @@
+TIMER <=> (time = 0) & [](time' = 1).
+
+SET_RADIUS(radius) <=> (r = radius) & [](r' = 0).
+SET_OMEGA(omega)   <=> (w = omega)  & [](w' = 0).
+
+UPDATE_THETA(phase) <=> [](theta = w * time + phase) & (theta' = 0).
+
+INIT_POSITION <=> (x = r*cos(theta)  &  y = r*sin(theta)).
+INIT_VELOCITY <=> (x' = -r*w*sin(theta)  &  y' = r*w*cos(theta)).
+ORBIT_ACC     <=> [](x''= -r*(w^2)*cos(theta) & y'' = -r*(w^2)*sin(theta)).
+
+TIMER,
+SET_RADIUS(10),
+SET_OMEGA(3.14 * 2 / 4),	// frequency 'w'; period 'T' = 4
+UPDATE_THETA(0),
+INIT_POSITION,
+INIT_VELOCITY,
+ORBIT_ACC.
