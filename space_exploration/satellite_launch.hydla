@@ -5,19 +5,20 @@
 TIMER <=> (time = 0) & [](time' = 1).
 
 SET_GRAVITY(gravity) <=> (g = gravity) & [](g' = 0).
-SET_RADIUS(radius)   <=> (r = radius) & [](r' = 0).
-SET_ALTITUDE(height) <=> (h = height) & [](h' = 0).
-SET_MASS(mass)       <=> (m = mass)   & [](m' = 0).
-SET_OMEGA(omega)     <=> (w = omega)  & [](w' = 0).
+SET_RADIUS(radius)   <=> (r = radius)  & [](r' = 0).
+SET_ALTITUDE(height) <=> (h = height)  & [](h' = 0).
+SET_MASS(mass)       <=> (m = mass)    & [](m' = 0).
+SET_OMEGA(omega)     <=> (w = omega)   & [](w' = 0).
 
 UPDATE_THETA(phase) <=> [](theta = w * time + phase) & (theta' = 0).
 
 // INIT_POSITION <=> (x = r*cos(theta)  &  y = r*sin(theta)).
 // INIT_VELOCITY <=> (x' = -r*w*sin(theta)  &  y' = r*w*cos(theta)).
-ORBIT_ACC     <=> [](x'' = -r*(w^2)*cos(theta) & y'' = -r*(w^2)*sin(theta)).
+// ORBIT_ACC     <=> [](x'' = -r*(w^2)*cos(theta) & y'' = -r*(w^2)*sin(theta)).
 
-INIT_POSITION <=> (x = r*cos(theta)  &  y = r*sin(theta)).
-INIT_VELOCITY <=> (x' = -r*w*sin(theta)  &  y' = r*w*cos(theta)).
+INIT_POSITION <=> (x = r  &  y = 0).
+INIT_VELOCITY <=> (x' = -(r+h)*w*sin(theta)  &  y' = (r+h)*w*cos(theta)).
+ORBIT_ACC     <=> [](x'' = -(r+h)*(w^2)*cos(theta) & y'' = -(r+h)*(w^2)*sin(theta)).
 // ORBIT_ACC     <=> [](x'' = ((x'-)^2)/(r+h) & y'' = ((y'-)^2)/(r+h)).
 
 // INJECTION <=> [](x'- = 0 & y'- < 0 => x'' = 0 & y'' = 0).
@@ -25,8 +26,8 @@ INIT_VELOCITY <=> (x' = -r*w*sin(theta)  &  y' = r*w*cos(theta)).
 TIMER,
 SET_GRAVITY(9.8),		// gravity of earth 'g' = 9.8 (m/s^2)
 SET_RADIUS(6.4 * 10^6),	     	// radius of earth 'r' = 6.4 * 10^6 (m)
-SET_ALTITUDE(0),  	 	// altitude of satellite 'h' = 0 (m)
-SET_MASS(3),			// mass of satellite 'm' = 3
+SET_ALTITUDE(1 * 10^5),  	// altitude of satellite 'h' = 0 (m)
+SET_MASS(335 * 10^3),		// mass of satellite 'm' = 335,000 (g)
 SET_OMEGA(3.14 * 2 / 4),	// frequency 'w'; period 'T' = 4
 UPDATE_THETA(0),
 INIT_POSITION,
