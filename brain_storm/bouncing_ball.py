@@ -9,12 +9,15 @@ class Environment(object):
 
 
 class Ball(Environment):
-	def __init__(self, init_x=0.0, init_xv=0.0, init_y=10.0, init_yv=0.0, e=0.8):
+	def __init__(self, init_x=0.0, init_xv=0.0, init_y=10.0, init_yv=0.0, e=0.99):
 		Environment.__init__(self)
+		self.x = init_x
 		self.init_x = init_x
 		self.init_xv = init_xv
+		self.y = init_y
 		self.init_y = init_y
 		self.init_yv = init_yv
+		self.y = init_y
 		self.e = e
 
 	def simulate(self, t_limit):
@@ -24,30 +27,34 @@ class Ball(Environment):
 		t_elapsed = time.time() - t_start
 
 		while(t_elapsed <= t_limit):
-		
+
 			self.xv = self.init_xv + self.wind * t_elapsed
 			self.yv = self.init_yv + self.g * t_elapsed
 		
 			# bounce
-			if (self.init_y + self.yv * t_elapsed <= 0):
-				phase += 1
-				time.sleep(3)
+			if ((self.y > 0) and ((self.init_y + self.yv * t_elapsed) <= 0)):
 				self.yv *= (-1) * self.e
-		
-			self.x = self.init_x + self.xv * t_elapsed
-			self.y = self.init_y + self.yv * t_elapsed
-		
-			# print("elapsed_time :", time.time() - t_start)
+				self.init_yv = self.yv
+				self.init_y = self.y
+				t_start = time.time()
+				phase += 1
+
+			elif (self.y <= 0):
+				return
+
 			print("phase", phase)
 			print("x: %f, y: %f" % (self.x, self.y))
 			t_elapsed = time.time() - t_start
+
+			self.x = self.init_x + self.xv * t_elapsed
+			self.y = self.init_y + self.yv * t_elapsed
 
 
 def main():
 	print("Bouncing Ball simulation in Python")
 	my_env = Environment()
 	my_ball = Ball()
-	my_ball.simulate(10)
+	my_ball.simulate(3)
 
 
 if __name__ == "__main__":
