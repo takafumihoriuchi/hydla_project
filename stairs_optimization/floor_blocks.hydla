@@ -13,7 +13,7 @@ BOUNCE(bn, bnx) <=> [](y- = 0  &  bn <= x < bnx  =>  y' = -9/10 * y'-).
 
 BLOCK := {b0..b10}.
 SET_BLOCKS := { SET_BLOCK(BLOCK[i], i) | i in {0..|BLOCK|} }.
-BOUNCES := { BOUNCE(BLOCK[i], BLOCK[i+1]) | i in {0..(|BLOCK|-1) } }.
+BOUNCES := { BOUNCE(BLOCK[i], BLOCK[i+1]) | i in {0..|BLOCK|-1 } }.
 
 INIT_X, INIT_Y, X_MOVE,
 SET_BLOCKS, (FALL << BOUNCES).
