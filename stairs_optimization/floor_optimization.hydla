@@ -1,6 +1,7 @@
 // bouciong ball on a floor
 // (with auxiliary line)
 // (floor splitted into blocks)
+// want to show hight efficiency with this model
 
 
 INIT_Y <=> (y = 10  &  y' = 0).

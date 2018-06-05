@@ -1,5 +1,5 @@
 // bouciong ball on a floor
-// (floor NOT splitted into blocks)
+// plus x-move to original (floor NOT splitted into blocks)
 
 INIT_X <=> (x = 0).
 X_MOVE <=> [](x' = 0.1).

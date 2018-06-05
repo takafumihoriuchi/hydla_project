@@ -1,5 +1,6 @@
 // bouciong ball on a floor
 // (floor splitted into blocks)
+// want to show low efficiency with this model
 
 INIT_X <=> (x = 0).
 X_MOVE <=> [](x' = 0.1).

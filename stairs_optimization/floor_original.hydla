@@ -1,4 +1,5 @@
 // bouciong ball on a floor
+// original
 
 INIT_Y <=> y = 10  &  y' = 0.
 
