@@ -1,16 +1,19 @@
-// bouciong ball on a floor (with auxiliary line)
+// bouciong ball on a floor
+// (with auxiliary line)
+// (floor splitted into blocks)
+
+
+INIT_Y <=> (y = 10  &  y' = 0).
+FALL   <=> [](y'' = -9.8).
+BOUNCE <=> [](y- = 0  =>  y' = -9/10 * y'-).
+
+
 
 MID_AIR   <=> air = 1.
 AIR_CONST <=> [](air' = 0).
-
-INIT_Y <=> y = 10  &  y' = 0.
-
-FALL   <=> [](y'' = -9.8).
-
-BOUNCE <=> [](y- = 0  =>  y' = -9/10 * y'-).
-
 ABOVE_LINE <=> [](y- >= 1  &  air- = 0  =>  air = 1).
 BELOW_LINE <=> [](y- <= 1  &  air- = 1  =>  air = 0).
+
 
 INIT_Y, MID_AIR,
 (AIR_CONST << (ABOVE_LINE, BELOW_LINE)),
