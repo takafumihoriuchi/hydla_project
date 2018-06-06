@@ -4,18 +4,22 @@
 // want to show hight efficiency with this model
 
 
-INIT_Y <=> (y = 10  &  y' = 0).
+INIT_X <=> (x = 0).
+X_MOVE <=> [](x' = 0.1).
+INIT_Y <=> (y = 12  &  y' = 0).
 FALL   <=> [](y'' = -9.8).
-BOUNCE <=> [](y- = 0  =>  y' = -9/10 * y'-).
 
+SET_BLOCK(bn, b) <=> (bn = b) & [](bn' = 0).
+BOUNCE(bn, bnx) <=> [](y- = 0  &  bn <= x < bnx  =>  y' = -9/10 * y'-).
 
-
-MID_AIR   <=> air = 1.
-AIR_CONST <=> [](air' = 0).
+INIT_AIR <=> (air = 1) & [](air' = 0).
 ABOVE_LINE <=> [](y- >= 1  &  air- = 0  =>  air = 1).
 BELOW_LINE <=> [](y- <= 1  &  air- = 1  =>  air = 0).
 
+BLOCK := {b0..b100}.
+SET_BLOCKS := { SET_BLOCK(BLOCK[i], i-1) | i in {1..|BLOCK|} }.
+BOUNCES := { BOUNCE(BLOCK[i], BLOCK[i+1]) | i in {1..|BLOCK|-1} }.
 
-INIT_Y, MID_AIR,
-(AIR_CONST << (ABOVE_LINE, BELOW_LINE)),
-(FALL << BOUNCE).
+INIT_X, X_MOVE, INIT_Y,
+SET_BLOCKS, (FALL << BOUNCES),
+(INIT_AIR << (ABOVE_LINE, BELOW_LINE)).
