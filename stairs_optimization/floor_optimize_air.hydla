@@ -15,7 +15,7 @@ INIT_AIR <=> (air = 1) & [](air' = 0).
 ABOVE_LINE <=> [](y >= 1  &  air- = 0  =>  air = 1).
 BELOW_LINE <=> [](y <= 1  &  air- = 1  =>  air = 0).
 
-BLOCK := {b0..b10}.
+BLOCK := {b0..b100}.
 SET_BLOCKS := { SET_BLOCK(BLOCK[i], i-1) | i in {1..|BLOCK|} }.
 BOUNCES := { BOUNCE(BLOCK[i], BLOCK[i+1]) | i in {1..|BLOCK|-1} }.
 
