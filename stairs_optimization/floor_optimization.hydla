@@ -3,14 +3,13 @@
 // (floor splitted into blocks)
 // want to show hight efficiency with this model
 
-
 INIT_X <=> (x = 0).
 X_MOVE <=> [](x' = 0.1).
 INIT_Y <=> (y = 12  &  y' = 0).
 FALL   <=> [](y'' = -9.8).
 
 SET_BLOCK(bn, b) <=> (bn = b) & [](bn' = 0).
-BOUNCE(bn, bnx) <=> [](y- = 0  &  bn <= x < bnx  =>  y' = -9/10 * y'-).
+BOUNCE(bn, bnx) <=> [](air = 0  &  y- = 0  &  bn <= x < bnx  =>  y' = -9/10 * y'-).
 
 INIT_AIR <=> (air = 1) & [](air' = 0).
 ABOVE_LINE <=> [](y- >= 1  &  air- = 0  =>  air = 1).
