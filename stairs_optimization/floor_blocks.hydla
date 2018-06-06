@@ -4,16 +4,15 @@
 
 INIT_X <=> (x = 0).
 X_MOVE <=> [](x' = 0.1).
-
 INIT_Y <=> (y = 12  &  y' = 0).
 FALL   <=> [](y'' = -9.8).
 
 SET_BLOCK(bn, b) <=> (bn = b) & [](bn' = 0).
 BOUNCE(bn, bnx) <=> [](y- = 0  &  bn <= x < bnx  =>  y' = -9/10 * y'-).
 
-BLOCK := {b0..b10}.
-SET_BLOCKS := { SET_BLOCK(BLOCK[i], i) | i in {0..|BLOCK|} }.
-BOUNCES := { BOUNCE(BLOCK[i], BLOCK[i+1]) | i in {0..|BLOCK|-1 } }.
+BLOCK := {b0..b100}.
+SET_BLOCKS := { SET_BLOCK(BLOCK[i], i-1) | i in {1..|BLOCK|} }.
+BOUNCES := { BOUNCE(BLOCK[i], BLOCK[i+1]) | i in {1..|BLOCK|-1} }.
 
 INIT_X, INIT_Y, X_MOVE,
 SET_BLOCKS, (FALL << BOUNCES).
