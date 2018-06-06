@@ -2,7 +2,6 @@
 // (with auxiliary line)
 // (floor splitted into blocks)
 // want to show hight efficiency with this model
-// test commit test commit
 
 INIT_X <=> (x = 0).
 X_MOVE <=> [](x' = 0.1).
@@ -13,10 +12,10 @@ SET_BLOCK(bn, b) <=> (bn = b) & [](bn' = 0).
 BOUNCE(bn, bnx) <=> [](air = 0  &  y- = 0  &  bn <= x < bnx  =>  y' = -9/10 * y'-).
 
 INIT_AIR <=> (air = 1) & [](air' = 0).
-ABOVE_LINE <=> [](y- >= 1  &  air- = 0  =>  air = 1).
-BELOW_LINE <=> [](y- <= 1  &  air- = 1  =>  air = 0).
+ABOVE_LINE <=> [](y >= 1  &  air- = 0  =>  air = 1).
+BELOW_LINE <=> [](y <= 1  &  air- = 1  =>  air = 0).
 
-BLOCK := {b0..b100}.
+BLOCK := {b0..b10}.
 SET_BLOCKS := { SET_BLOCK(BLOCK[i], i-1) | i in {1..|BLOCK|} }.
 BOUNCES := { BOUNCE(BLOCK[i], BLOCK[i+1]) | i in {1..|BLOCK|-1} }.
 
