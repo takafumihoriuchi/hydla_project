@@ -1,8 +1,3 @@
-// bouciong ball on a floor
-// (with auxiliary line)
-// (floor splitted into blocks)
-// want to show hight efficiency with this model
-
 INIT_X <=> (x = 0).
 X_MOVE <=> [](x' = 0.1).
 INIT_Y <=> (y = 12  &  y' = 0).
@@ -18,7 +13,7 @@ INIT_AIR <=> (air = 1) & [](air' = 0).
 ABOVE_LINE <=> [](air- = 0  =>  ( y >= 1  =>  air = 1) ).
 BELOW_LINE <=> [](air- = 1  =>  ( y <= 1  =>  air = 0) ).
 
-BLOCK := {b0..b100}.
+BLOCK := {b0..b5}.
 SET_BLOCKS := { SET_BLOCK(BLOCK[i], i-1) | i in {1..|BLOCK|} }.
 BOUNCES := { BOUNCE(BLOCK[i], BLOCK[i+1]) | i in {1..|BLOCK|-1} }.
 
