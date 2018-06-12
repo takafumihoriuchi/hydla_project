@@ -4,12 +4,9 @@ INIT_Y <=> (y = 12  &  y' = 0).
 FALL   <=> [](y'' = -9.8).
 
 SET_BLOCK(bn, b) <=> (bn = b) & [](bn' = 0).
-// BOUNCE(bn, bnx) <=> [](air = 0  &  y- = 0  &  bn <= x < bnx  =>  y' = -9/10 * y'-).
 BOUNCE(bn, bnx) <=> [](air = 0  =>  ( bn <= x < bnx  =>  ( y- = 0  =>  y' = -9/10 * y'-) ) ).
 
 INIT_AIR <=> (air = 1) & [](air' = 0).
-// ABOVE_LINE <=> [](y >= 1  &  air- = 0  =>  air = 1).
-// BELOW_LINE <=> [](y <= 1  &  air- = 1  =>  air = 0).
 ABOVE_LINE <=> [](air- = 0  =>  ( y >= 1  =>  air = 1) ).
 BELOW_LINE <=> [](air- = 1  =>  ( y <= 1  =>  air = 0) ).
 
