@@ -1,0 +1,1 @@
+{"first_phases":[{"children":[],"id":1,"parameter_map":{},"parameter_maps":[{}],"simulation_state":"INCONSISTENCY","time":{"time_point":"0"},"type":"PP","variable_map":{}}],"name":"curling_one_dim_one_stone","parameters":{},"variables":["border","sweep","y","border'","sweep'","y'","y''"]}
