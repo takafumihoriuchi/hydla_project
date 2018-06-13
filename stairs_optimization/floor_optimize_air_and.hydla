@@ -4,11 +4,11 @@ INIT_Y <=> (y = 12  &  y' = 0).
 FALL   <=> [](y'' = -9.8).
 
 SET_BLOCK(bn, b) <=> (bn = b) & [](bn' = 0).
-BOUNCE(bn, bnx) <=> [](air = 0  &  y- = 0  &  bn <= x < bnx  =>  y' = -9/10 * y'-).
+BOUNCE(bn, bnx) <=> [](air = 0  &  bn <= x < bnx  &  y- = 0  =>  y' = -9/10 * y'-).
 
 INIT_AIR <=> (air = 1) & [](air' = 0).
-ABOVE_LINE <=> [](air- = 0  &  y >= 1  =>  air = 1).
-BELOW_LINE <=> [](air- = 1  &  y <= 1  =>  air = 0).
+ABOVE_LINE <=> [](air- = 0  &  y = 1  =>  air = 1).
+BELOW_LINE <=> [](air- = 1  &  y = 1  =>  air = 0).
 
 BLOCK := {b0..b100}.
 SET_BLOCKS := { SET_BLOCK(BLOCK[i], i-1) | i in {1..|BLOCK|} }.
@@ -16,4 +16,4 @@ BOUNCES := { BOUNCE(BLOCK[i], BLOCK[i+1]) | i in {1..|BLOCK|-1} }.
 
 INIT_X, X_MOVE, INIT_Y,
 SET_BLOCKS, (FALL << BOUNCES),
-(INIT_AIR << (ABOVE_LINE << BELOW_LINE)).
+(INIT_AIR << (ABOVE_LINE, BELOW_LINE)).

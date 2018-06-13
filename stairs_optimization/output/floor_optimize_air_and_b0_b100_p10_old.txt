@@ -436,7 +436,7 @@ unsat mod	: {BELOW_LINE, FALL, INIT_AIR}
 		  {BELOW_LINE, INIT_AIR}
 unsat cons	: {air'=0, air=0}
 		  {air'=0, air=0}
-positive 	: air-=1&y=1=>air=0
+positive 	: air-=1&y<=1=>air=0
 negative 	: 
 t	: 110^(1/2)*1/7
 air	: 0
@@ -650,7 +650,7 @@ y''	: -49/5
 ---------IP 5---------
 unadopted modules: {}
 positive 	: 
-negative 	: air-=1&y=1=>air=0
+negative 	: air-=1&y<=1=>air=0
 t	: 110^(1/2)*1/7->30^(1/2)*2/7
 air	: 0
 b0	: 0
@@ -868,7 +868,7 @@ unsat mod	: {BOUNCE(b0,b1), FALL, INIT_AIR, SET_BLOCK(b0,1-1), SET_BLOCK(b1,2-1)
 		  {BOUNCE(b0,b1), FALL, SET_BLOCK(b0,1-1), SET_BLOCK(b1,2-1), X_MOVE}
 unsat cons	: {y''=-(98/10), y'=-9/10*y'-}
 		  {y''=-(98/10), y'=-9/10*y'-}
-positive 	: air=0&b0<=x&x<b1&y-=0=>y'=-9/10*y'-
+positive 	: air=0&y-=0&b0<=x&x<b1=>y'=-9/10*y'-
 negative 	: 
 t	: 30^(1/2)*2/7
 air	: 0
@@ -1082,7 +1082,7 @@ y'	: (6/5)^(1/2)*63/5
 ---------IP 8---------
 unadopted modules: {}
 positive 	: 
-negative 	: air=0&b0<=x&x<b1&y-=0=>y'=-9/10*y'-
+negative 	: air=0&y-=0&b0<=x&x<b1=>y'=-9/10*y'-
 t	: 30^(1/2)*2/7->(19*30^(1/2)+545^(1/2)*(-2))*1/35
 air	: 0
 b0	: 0
@@ -1300,7 +1300,7 @@ unsat mod	: {ABOVE_LINE, FALL, INIT_AIR}
 		  {ABOVE_LINE, INIT_AIR}
 unsat cons	: {air'=0, air=1}
 		  {air'=0, air=1}
-positive 	: air-=0&y=1=>air=1
+positive 	: air-=0&y>=1=>air=1
 negative 	: 
 t	: (19*30^(1/2)+545^(1/2)*(-2))*1/35
 air	: 1
@@ -1514,7 +1514,7 @@ y''	: -49/5
 ---------IP 11---------
 unadopted modules: {}
 positive 	: 
-negative 	: air-=0&y=1=>air=1
+negative 	: air-=0&y>=1=>air=1
 t	: (19*30^(1/2)+545^(1/2)*(-2))*1/35->(19*30^(1/2)+2*545^(1/2))*1/35
 air	: 1
 b0	: 0
@@ -1732,7 +1732,7 @@ unsat mod	: {BELOW_LINE, FALL, INIT_AIR}
 		  {BELOW_LINE, INIT_AIR}
 unsat cons	: {air'=0, air=0}
 		  {air'=0, air=0}
-positive 	: air-=1&y=1=>air=0
+positive 	: air-=1&y<=1=>air=0
 negative 	: 
 t	: (19*30^(1/2)+2*545^(1/2))*1/35
 air	: 0
@@ -1946,7 +1946,7 @@ y''	: -49/5
 ---------IP 14---------
 unadopted modules: {}
 positive 	: 
-negative 	: air-=1&y=1=>air=0
+negative 	: air-=1&y<=1=>air=0
 t	: (19*30^(1/2)+2*545^(1/2))*1/35->4*(6/5)^(1/2)
 air	: 0
 b0	: 0
@@ -2159,6 +2159,6 @@ y'	: (19*30^(1/2)+t*(-35))*7/25
 y''	: -49/5
 # number of phases reached limit
 
-Simulation Time : 1543.558130 s
-Finish Time : 1543.600142 s
+Simulation Time : 1404.278416 s
+Finish Time : 1404.321120 s
 
