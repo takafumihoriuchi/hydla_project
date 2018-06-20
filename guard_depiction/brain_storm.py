@@ -1,3 +1,5 @@
+import numpy as np
+import matplotlib.pyplot as plt
 
 
 def main():
@@ -12,16 +14,40 @@ def main():
 	# parse guard constraint and store in guard_list
 	guard_list = []
 	arrow_idx = 0
-	while arrow_idx != -1:
+	while True:
 		# HACK: improve the procudure of parsing
 		# current implementation: parse between '(' and '=>' (NOT SUFFICIENT)
 		# BOUNCE(y) <=> [](y- = 0 => y' = -y'-).
-		arrow_idx = hydla_code.find("=>", arrow_idx + 1)
-		
-		guard = 
-		guard_list.append()
+		arrow_idx = hydla_code.find(" =>", arrow_idx + 1)
+		if arrow_idx == -1:
+			break
+		for i in range(arrow_idx, -1, -1):
+			if hydla_code[i] == '(':
+				left_parentheses = i
+				break
+		guard = hydla_code[left_parentheses + 1 : arrow_idx + 1]
+		# cleanse format
+		guard_cleansed = guard.replace(' ', '').replace('-', '')
+		guard_list.append(guard_cleansed)
+	print(guard_list)
 
-	# plot guard constrains
+	for each_guard in guard_list:
+		
+		# transform equation from string-form to variable-form
+		# HACK: not sufficient to general equations
+		equal_symbol = each_guard.find('=')
+		left_side = each_guard[:equal_symbol]
+		right_side = each_guard[equal_symbol+1:]
+		vars()[left_side] = float(right_side)
+
+		# plot guard constrains
+		# HACK: the current code is not plotting the equation
+		t = np.arange(0, 5, 0.1)
+		left_side = [right_side for i in t]
+
+		plt.plot(t,left_side)
+		plt.show()
+
 
 
 if __name__ == '__main__':
