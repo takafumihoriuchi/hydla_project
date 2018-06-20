@@ -1,10 +1,11 @@
-// many bouncing particles
-Y := {y0..y9}.
+// bouncing particle
 
-INIT(y, y0) <=> y = y0 & y' = 0.
-FALL(y) <=> [](y'' = -10).
-BOUNCE(y) <=> [](y- = 0 => y' = -y'-).
 
-{ INIT(Y[i],i+1), FALL(Y[i]) << BOUNCE(Y[i]) | i in {1..|Y|} }.
+INIT   <=> y = 10  &  y' = 0.
+FALL   <=> [](y'' = -10).
+BOUNCE <=> [](y- = 0  =>  y' = -4/5 * y'-).
 
-//#hylagi -p 6
+INIT, FALL << BOUNCE.
+
+
+// #hylagi --fdump_in_progress -p 10
