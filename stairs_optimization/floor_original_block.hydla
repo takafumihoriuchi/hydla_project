@@ -1,6 +1,8 @@
-// bouciong ball on a floor
-// (floor splitted into blocks)
-// want to show low efficiency with this model
+/*==================================
+bouciong ball on a floor
+floor splitted into blocks
+expects low efficiency for this model
+====================================*/
 
 INIT_X <=> (x = 0).
 X_MOVE <=> [](x' = 0.1).
@@ -16,3 +18,5 @@ BOUNCES := { BOUNCE(BLOCK[i], BLOCK[i+1]) | i in {1..|BLOCK|-1} }.
 
 INIT_X, INIT_Y, X_MOVE,
 SET_BLOCKS, (FALL << BOUNCES).
+
+// #hylagi -p 10
