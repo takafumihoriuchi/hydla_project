@@ -9,7 +9,7 @@ union bits {
 };
 
 bits::bits(double n) {
-	d = n;
+  d = n;
 }
 
 void bits::show_bits() {
