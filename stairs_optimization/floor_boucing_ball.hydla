@@ -13,3 +13,5 @@ BOUNCE <=> [](y- = 0  & 0 <= x < 11  => y' = -9/10 * y'-).
 INIT_X, INIT_Y,
 X_MOVE,
 (FALL << BOUNCE).
+
+// #hylagi -p 10
