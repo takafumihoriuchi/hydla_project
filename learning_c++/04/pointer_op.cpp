@@ -17,15 +17,18 @@ int main()
 		samp(5,6),
 		samp(7,8)
   };
+  int i;
 
   samp *p;
   p = &ob[3];
 
-  for (int i=0; i<4; i++) {
+  for (i=0; i<4; i++) {
     cout << p->get_a() << ' ';
     cout << p->get_b() << "\n";
     p--;
   }
+
+  cout << "\n";
 
   return 0;
 }
