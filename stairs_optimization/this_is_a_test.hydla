@@ -1,10 +1,10 @@
 INIT_X    <=> (x = 0).
-X_MOVE    <=> [](x' = 5).
+X_MOVE    <=> (x' = 5) & [](x'' = 0).
 INIT_Y(h) <=> (y = h  &  y' = 0).
 FALL(g)   <=> [](y'' = -g).
 
-FLOOR        <=> [](y- = 0  =>  y' = -9/10 * y'-).
-WALL(wall_x) <=> [](x- = wall_x  =>  x' = -x'-).
+FLOOR     <=> [](y- = 0  =>  y' = -9/10 * y'-).
+WALL(w)   <=> [](x- = w  =>  x' = -x'-).
 
 INIT_X,
 (X_MOVE << WALL(10) ),
