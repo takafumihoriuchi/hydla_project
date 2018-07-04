@@ -10,13 +10,14 @@ FALL(g)   <=> [](y'' = -g).
 
 FLOOR        <=> [](y- = 0  =>  y' = -9/10 * y'-).
 WALL(wall_x) <=> [](x- = wall_x  =>  x' = -x'-).
+WALL_R <=> [](x- = 10  =>  x' = -1 * x'-).
 
 BOUNCE_ON_STEP_HOR(left_x, top_y) <=> []((y- = top_y) & (left_x <= x <= left_x + 1) => (y' = -9/10 * y'-)).
 BOUNCE_ON_STEP_VER(left_x, top_y) <=> []((x- = left_x + 1) & (top_y - 1 <= y <= top_y) => (x' = -x'-)).
 BOUNCE := { BOUNCE_ON_STEP_HOR(i, 9-i), BOUNCE_ON_STEP_VER(i, 9-i) | i in {0..(9-1)} }.
 
 INIT_X,
-(X_MOVE << WALL(0) << WALL(10) ),
+(X_MOVE << (WALL(0), WALL(9+1)) << WALL_R),
 INIT_Y(9+2),
 (FALL(9.8) << BOUNCE << FLOOR).
 
