@@ -1,7 +1,7 @@
-/*==================================
-a boucing ball folling down a stairs
+/*===================================
+a boucing ball folling down a stair
 expects low efficiency for this model
-====================================*/
+=====================================*/
 
 INIT_X(v) <=> (x = 0 & x' = v).
 X_MOVE    <=> [](x'' = 0).
@@ -18,6 +18,6 @@ BOUNCE := { BOUNCE_ON_STEP_HOR(i, 9-i), BOUNCE_ON_STEP_VER(i, 9-i) | i in {0..(9
 INIT_X(1),
 (X_MOVE << (WALL(0), WALL(9+1))),
 INIT_Y(9+2),
-(FALL(9.8) << (BOUNCE, FLOOR)).
+(FALL(9.8) << BOUNCE << FLOOR).
 
 // #hylagi -t 30
