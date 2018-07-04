@@ -21,4 +21,4 @@ INIT_X(2.1),
 INIT_Y(9+2),
 (FALL(9.8) << BOUNCE_HOR << FLOOR).
 
-// #hylagi -t 30
+// #hylagi -t 10
