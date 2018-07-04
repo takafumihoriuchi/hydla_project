@@ -8,8 +8,8 @@ X_MOVE    <=> [](x' = 1).
 INIT_Y(h) <=> (y = h  &  y' = 0).
 FALL(g)   <=> [](y'' = -g).
 
-FLOOR        <=> [](y- = 0  =>  y' = -y'-).
-WALL(wall_x) <=> [](x' = wall_x  =>  x' = -x'-).
+FLOOR        <=> [](y- = 0  =>  y' = -9/10 * y'-).
+WALL(wall_x) <=> [](x = wall_x  =>  x' = -x'-).
 
 BOUNCE_ON_STEP_HOR(left_x, top_y) <=> []((y- = top_y) & (left_x <= x <= left_x + 1) => (y' = -9/10 * y'-)).
 BOUNCE_ON_STEP_VER(left_x, top_y) <=> []((x- = left_x + 1) & (top_y - 1 <= y <= top_y) => (x' = -x'-)).
