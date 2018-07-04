@@ -16,7 +16,7 @@ BOUNCE_ON_STEP_VER(left_x, top_y) <=> []((x- = left_x + 1) & (top_y - 1 <= y < t
 BOUNCE_HOR := { BOUNCE_ON_STEP_HOR(i, 9-i) | i in {0..(9-1)} }.
 BOUNCE_VER := { BOUNCE_ON_STEP_VER(i, 9-i) | i in {0..(9-1)} }.
 
-INIT_X(2.1),
+INIT_X(1),
 (X_MOVE << BOUNCE_VER << (WALL(0), WALL(9+1))),
 INIT_Y(9+2),
 (FALL(9.8) << BOUNCE_HOR << FLOOR).
