@@ -3,8 +3,7 @@ a variation of bouncing_ball.hydla
 designed intentionally to have low efficiency
 many floors over-lapping one another like a "mille-feuille"
 each floor is shifted to right by one x-unit
-
-this is a test model for writing with simpler constraints
+this is a model with simpler constraints
 ========================================================*/
 
 INIT_X <=> (x = 0).
