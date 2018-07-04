@@ -3,8 +3,8 @@ a variation of bouncing_ball.hydla
 designed intentionally to have low efficiency
 many floors over-lapping one another like a "mille-feuille"
 each floor is shifted to right by one x-unit
-again, this model is intentionally made inefficient
-the goal is to make this model efficient
+
+this is a test model for writing with simpler constraints
 ========================================================*/
 
 INIT_X <=> (x = 0).
@@ -12,14 +12,10 @@ X_MOVE <=> [](x' = 0.1).
 INIT_Y <=> (y = 12  &  y' = 0).
 FALL   <=> [](y'' = -9.8).
 
-SET_LAYER(mn, m) <=> (mn = m) & [](mn' = 0).
-BOUNCE(mn)  <=> []( (y- = 0)  &  (mn <= x)  =>  (y' = -9/10 * y'-) ).
-
-LAYER := {m0..m100}.
-SET_LAYERS := { SET_LAYER(LAYER[i], i-1) | i in {1..|LAYER|} }.
-BOUNCES    := { BOUNCE(LAYER[i])         | i in {1..|LAYER|} }.
+BOUNCE(n) <=> []( (y- = 0)  &  (n <= x)  =>  (y' = -9/10 * y'-) ).
+BOUNCES := { BOUNCE(i) | i in {0..10} }.
 
 INIT_X, INIT_Y, X_MOVE,
-SET_LAYERS, (FALL << BOUNCES).
+(FALL << BOUNCES).
 
 // #hylagi -p 10
