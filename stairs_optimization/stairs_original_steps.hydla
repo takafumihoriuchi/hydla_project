@@ -6,16 +6,18 @@ expects low efficiency for this model
 INIT_X    <=> (x = 0).
 X_MOVE    <=> [](x' = 1).
 INIT_Y(h) <=> (y = h  &  y' = 0).
-FALL      <=> [](y'' = -9.8).
+FALL(g)   <=> [](y'' = -g).
 
-FLOOR <=> [](y' = 0  =>  y' = -y'-).
+FLOOR        <=> [](y' = 0  =>  y' = -y'-).
+WALL(wall_x) <=> [](x' = wall_x  =>  x' = -x'-).
 
 BOUNCE_ON_STEP_HOR(left_x, top_y) <=> []((y- = top_y) & (left_x <= x <= left_x + 1) => (y' = -9/10 * y'-)).
 BOUNCE_ON_STEP_VER(left_x, top_y) <=> []((x- = left_x + 1) & (top_y - 1 <= y <= top_y) => (x' = -x'-)).
 BOUNCE := { BOUNCE_ON_STEP_HOR(i, 9-i), BOUNCE_ON_STEP_VER(i, 9-i) | i in {0..(9-1)} }.
 
-INIT_X, X_MOVE,
+INIT_X,
+(X_MOVE << (WALL(0), WALL(9+1))),
 INIT_Y(9+2),
-(FALL << FLOOR << BOUNCE).
+(FALL(9.8) << FLOOR << BOUNCE).
 
-// #hylagi -p 20
+// #hylagi -t 30
