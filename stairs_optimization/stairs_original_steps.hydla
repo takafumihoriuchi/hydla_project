@@ -4,7 +4,7 @@ expects low efficiency for this model
 ====================================*/
 
 INIT_X    <=> (x = 0).
-X_MOVE    <=> [](x' = 1).
+X_MOVE    <=> [](x' = 5).
 INIT_Y(h) <=> (y = h  &  y' = 0).
 FALL(g)   <=> [](y'' = -g).
 
@@ -20,4 +20,4 @@ INIT_X,
 INIT_Y(9+2),
 (FALL(9.8) << BOUNCE << FLOOR).
 
-// #hylagi -t 30
+// #hylagi -t 5
