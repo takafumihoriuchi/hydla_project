@@ -1,0 +1,14 @@
+INIT_X    <=> (x = 0).
+X_MOVE    <=> [](x' = 5).
+INIT_Y(h) <=> (y = h  &  y' = 0).
+FALL(g)   <=> [](y'' = -g).
+
+FLOOR        <=> [](y- = 0  =>  y' = -9/10 * y'-).
+WALL(wall_x) <=> [](x- = wall_x  =>  x' = -x'-).
+
+INIT_X,
+(X_MOVE << WALL(10) ),
+INIT_Y(9+2),
+(FALL(9.8) << FLOOR).
+
+// #hylagi -t 5
