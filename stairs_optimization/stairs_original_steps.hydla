@@ -8,7 +8,7 @@ X_MOVE    <=> [](x' = 1).
 INIT_Y(h) <=> (y = h  &  y' = 0).
 FALL(g)   <=> [](y'' = -g).
 
-FLOOR        <=> [](y' = 0  =>  y' = -y'-).
+FLOOR        <=> [](y- = 0  =>  y' = -y'-).
 WALL(wall_x) <=> [](x' = wall_x  =>  x' = -x'-).
 
 BOUNCE_ON_STEP_HOR(left_x, top_y) <=> []((y- = top_y) & (left_x <= x <= left_x + 1) => (y' = -9/10 * y'-)).
