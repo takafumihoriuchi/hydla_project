@@ -8,6 +8,7 @@ X_MOVE    <=> [](x'' = 0).
 INIT_Y(h) <=>   (y = h  &  y' = 0).
 FALL(g)   <=> [](y'' = -g).
 
+// FLOORでの跳ね返りと、BOUNCE_ON_STEP_HORの跳ね返りが同時に起こり上下の動きがとなってしまう。
 FLOOR     <=> [](y- = 0  =>  y' = -9/10 * y'-).
 WALL(w)   <=> [](x- = w  =>  x' = -x'-).
 
