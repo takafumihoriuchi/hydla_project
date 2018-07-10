@@ -1,15 +1,13 @@
-/*===================================
+/*====================================================================================================
 a boucing ball on a stair
-expects low efficiency for this model
-=====================================*/
+only one step is created, with this single step adjusting position depending on the x-position of ball
+====================================================================================================*/
 
 INIT_X(v) <=>   (x = 0 & x' = v).
 X_MOVE    <=> [](x'' = 0).
 INIT_Y(h) <=>   (y = h  &  y' = 0).
 FALL(g)   <=> [](y'' = -g).
 
-// FLOORでの跳ね返りと、BOUNCE_ON_STEP_HORの跳ね返りが同時に起こり上下の動きがとなってしまう。
-FLOOR     <=> [](y- = 0  =>  y' = -9/10 * y'-).
 WALL(w)   <=> [](x- = w  =>  x' = -x'-).
 
 BOUNCE_ON_STEP_HOR(left_x, bottom_y) <=> []((y- = bottom_y) & (left_x <= x < left_x + 1) => (y' = -9/10 * y'-)).
@@ -18,8 +16,7 @@ BOUNCE_HOR := { BOUNCE_ON_STEP_HOR(i, 9-i) | i in {0..9} }.
 BOUNCE_VER := { BOUNCE_ON_STEP_VER(i, 9-i) | i in {0..9} }.
 
 INIT_X(3), INIT_Y(9+2),
-(FALL(9.8) << FLOOR << BOUNCE_HOR),
-// (FALL(9.8) << BOUNCE_HOR << FLOOR),
+(FALL(9.8) << BOUNCE_HOR),
 (X_MOVE << BOUNCE_VER << (WALL(0), WALL(9+1))).
 
-// #hylagi -t 10
+// #hylagi -t 20
