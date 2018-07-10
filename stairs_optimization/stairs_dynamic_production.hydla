@@ -17,7 +17,8 @@ BOUNCE_HOR := { BOUNCE_ON_STEP_HOR(i, 9-i) | i in {0..9} }.
 BOUNCE_VER := { BOUNCE_ON_STEP_VER(i, 9-i) | i in {0..9} }.
 
 INIT_X(3), INIT_Y(9+2),
-(FALL(9.8) << BOUNCE_HOR << FLOOR),
+(FALL(9.8) << BOUNCE_HOR),
+// (FALL(9.8) << BOUNCE_HOR << FLOOR),
 (X_MOVE << BOUNCE_VER << (WALL(0), WALL(9+1))).
 
 // #hylagi -t 10
