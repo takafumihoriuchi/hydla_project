@@ -1,0 +1,23 @@
+/*===================================
+a boucing ball on a stair
+expects low efficiency for this model
+=====================================*/
+
+INIT_X(v) <=>   (x = 0 & x' = v).
+X_MOVE    <=> [](x'' = 0).
+INIT_Y(h) <=>   (y = h  &  y' = 0).
+FALL(g)   <=> [](y'' = -g).
+
+FLOOR     <=> [](y- = 0  =>  y' = -9/10 * y'-).
+WALL(w)   <=> [](x- = w  =>  x' = -x'-).
+
+BOUNCE_ON_STEP_HOR(left_x, top_y) <=> []((y- = top_y) & (left_x < x <= left_x + 1) => (y' = -9/10 * y'-)).
+BOUNCE_ON_STEP_VER(left_x, top_y) <=> []((x- = left_x + 1) & (top_y - 1 <= y < top_y) => (x' = -x'-)).
+BOUNCE_HOR := { BOUNCE_ON_STEP_HOR(i, 9-i) | i in {0..(9-1)} }.
+BOUNCE_VER := { BOUNCE_ON_STEP_VER(i, 9-i) | i in {0..(9-1)} }.
+
+INIT_X(3), INIT_Y(9+2),
+(FALL(9.8) << BOUNCE_HOR << FLOOR),
+(X_MOVE << BOUNCE_VER << (WALL(0), WALL(9+1))).
+
+// #hylagi -t 3

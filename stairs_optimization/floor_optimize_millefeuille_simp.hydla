@@ -11,7 +11,15 @@ X_MOVE <=> [](x'' = 0).
 INIT_Y <=>   (y = 12  &  y' = 0).
 FALL   <=> [](y'' = -9.8).
 
+/*
+// attempt 1: fail
+OPTIMIZE(n) <=> []( (x <= n+1)  =>  (y' = y'-) ).
 BOUNCE(n) <=> []( (y- = 0)  &  (n <= x)  =>  (y' = -9/10 * y'-) ).
+BOUNCES := { BOUNCE(i) << OPTIMIZE(i) | i in {0..1000} }.
+*/
+
+// attempt 2
+BOUNCE(n) <=> []( (y- = 0)  &  (n <= x)  &  (x < n+1)  =>  (y' = -9/10 * y'-) ).
 BOUNCES := { BOUNCE(i) | i in {0..1000} }.
 
 INIT_X, INIT_Y, X_MOVE,
