@@ -1,22 +1,28 @@
-/*====================================================================================================
+/*================================================================================
 a boucing ball on a stair
-only one step is created, with this single step adjusting position depending on the x-position of ball
-====================================================================================================*/
+a single-step adjusts its position depending on the x-position of ball
+method: linear-search
+time-complexity: O(n)
+================================================================================*/
 
 INIT_X(v) <=>   (x = 0 & x' = v).
 X_MOVE    <=> [](x'' = 0).
 INIT_Y(h) <=>   (y = h  &  y' = 0).
 FALL(g)   <=> [](y'' = -g).
-
 WALL(w)   <=> [](x- = w  =>  x' = -x'-).
 
-BOUNCE_ON_STEP_HOR(left_x, bottom_y) <=> []((y- = bottom_y) & (left_x <= x < left_x + 1) => (y' = -9/10 * y'-)).
-BOUNCE_ON_STEP_VER(left_x, bottom_y) <=> []((x- = left_x) & (bottom_y  < y <= bottom_y + 1) => (x' = -x'-)).
-BOUNCE_HOR := { BOUNCE_ON_STEP_HOR(i, 9-i) | i in {0..9} }.
-BOUNCE_VER := { BOUNCE_ON_STEP_VER(i, 9-i) | i in {0..9} }.
+// a variable to store x-position of the single-step
+INIT_CORNER      <=>   cornerx = 0.
+CORNER_MOVE      <=> [](cornerx' = 0).
+DETECT_POS(left) <=> [](((y = -x + (9 + 1)) & (left <= x < left + 1))  =>  (cornerx = left)).
+STAIR_RANGE := { DETECT_POS(i) | i in {0..9} }.
 
-INIT_X(3), INIT_Y(9+2),
+BOUNCE_HOR <=> []((y- = 9 - cornerx) & (cornerx <= x < cornerx + 1)  =>  (y' = -9/10 * y'-)).
+BOUNCE_VER <=> []((x- = cornerx) & (9 - cornerx < y <= 9 - cornerx + 1)  =>  (x' = -x'-)).
+
+INIT_X(3), INIT_Y(9 + 2), INIT_CORNER,
+(CORNER_MOVE << STAIR_RANGE),
 (FALL(9.8) << BOUNCE_HOR),
-(X_MOVE << BOUNCE_VER << (WALL(0), WALL(9+1))).
+(X_MOVE << BOUNCE_VER << (WALL(0), WALL(10))).
 
-// #hylagi -t 20
+// #hylagi -p 2

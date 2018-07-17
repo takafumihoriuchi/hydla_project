@@ -1,8 +1,8 @@
-/*
+/*==============
 a floor function
-*/
+==============*/
 
-INIT_X  <=> x=0 & x'=1 & []x''=0.
+INIT_X <=> x=0 & x'=1 & []x''=0.
 INIT_Y <=> y=0.
 MOVE_Y <=> []y'=0.
 FLOOR_FUN(left) <=> []((left <= x < left + 1)  =>  y = left).
@@ -12,4 +12,4 @@ RANGE := { FLOOR_FUN(i) | i in {0..9} }.
 INIT_X, INIT_Y,
 (MOVE_Y << RANGE).
 
-// #hylali -t 10
+// #hylagi -t 10
