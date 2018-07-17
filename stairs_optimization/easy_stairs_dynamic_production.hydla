@@ -14,10 +14,10 @@ WALL(w)   <=> [](x- = w  =>  x' = -x'-).
 // a variable to store x-position of the single-step
 INIT_CORNER      <=>   (cornerx = 0).
 CORNER_MOVE      <=> [](cornerx' = 0).
-DETECT_POS(left) <=> []( (left <= x- < left + 1)  =>  (cornerx = left) ).
+DETECT_POS(left) <=> []( (left- <= x- < left- + 1)  =>  (cornerx = left-) ).
 STAIR_RANGE := { DETECT_POS(i) | i in {0..9} }.
 
-BOUNCE_HOR <=> []((y- = 9 - cornerx) & (cornerx <= x- < cornerx + 1)  =>  (y' = -9/10 * y'-)).
+BOUNCE_HOR <=> []((y- = 9 - cornerx-) & (cornerx- <= x- < cornerx- + 1)  =>  (y' = -9/10 * y'-)).
 
 INIT_X, INIT_Y(9 + 2), INIT_CORNER,
 (CORNER_MOVE << STAIR_RANGE),
