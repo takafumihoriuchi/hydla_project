@@ -1,4 +1,4 @@
-// many bouncing particles
+// many_bouncing_balls.hydla
 
 Y := {y0..y9}.
 

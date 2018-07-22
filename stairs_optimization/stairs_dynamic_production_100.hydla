@@ -5,8 +5,8 @@ method: linear-search
 time-complexity: O(n)
 ================================================================================*/
 
-INIT_X    <=>   (x = 0).
-X_MOVE(v) <=> [](x' = v).
+INIT_X(v) <=>   (x = 0 & x' = v).
+X_MOVE    <=> [](x'' = 0).
 INIT_Y(h) <=>   (y = h  &  y' = 0).
 FALL(g)   <=> [](y'' = -g).
 WALL(w)   <=> [](x- = w  =>  x' = -x'-).
@@ -14,14 +14,15 @@ WALL(w)   <=> [](x- = w  =>  x' = -x'-).
 // a variable to store x-position of the single-step
 INIT_CORNER      <=>   (cornerx = 0).
 CORNER_MOVE      <=> [](cornerx' = 0).
-DETECT_POS(left) <=> []( (left- <= x- < left- + 1)  =>  (cornerx = left-) ).
-STAIR_RANGE := { DETECT_POS(i) | i in {0..9} }.
+DETECT_POS(left) <=> [](((y = -x- + (99 + 1)) & (left <= x- < left + 1))  =>  (cornerx = left)).
+STAIR_RANGE := { DETECT_POS(i) | i in {0..99} }.
 
-BOUNCE_HOR <=> []((y- = 9 - cornerx-) & (cornerx- <= x- < cornerx- + 1)  =>  (y' = -9/10 * y'-)).
+BOUNCE_HOR <=> []((y- = 99 - cornerx-) & (cornerx- <= x- < cornerx- + 1)  =>  (y' = -9/10 * y'-)).
+BOUNCE_VER <=> []((x- = cornerx-) & (99 - cornerx- < y- <= 99 - cornerx- + 1)  =>  (x' = -x'-)).
 
-INIT_X, INIT_Y(9 + 2), INIT_CORNER,
+INIT_X(1), INIT_Y(12), INIT_CORNER,
 (CORNER_MOVE << STAIR_RANGE),
 (FALL(9.8) << BOUNCE_HOR),
-(X_MOVE(3) << (WALL(0), WALL(10))).
+(X_MOVE << BOUNCE_VER << (WALL(0), WALL(99 + 1))).
 
-// #hylagi -p 3
+// #hylagi -p 17

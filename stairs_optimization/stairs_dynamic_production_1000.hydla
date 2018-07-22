@@ -20,9 +20,9 @@ STAIR_RANGE := { DETECT_POS(i) | i in {0..999} }.
 BOUNCE_HOR <=> []((y- = 999 - cornerx-) & (cornerx- <= x- < cornerx- + 1)  =>  (y' = -9/10 * y'-)).
 BOUNCE_VER <=> []((x- = cornerx-) & (999 - cornerx- < y- <= 999 - cornerx- + 1)  =>  (x' = -x'-)).
 
-INIT_X(3), INIT_Y(12), INIT_CORNER,
+INIT_X(1), INIT_Y(12), INIT_CORNER,
 (CORNER_MOVE << STAIR_RANGE),
 (FALL(9.8) << BOUNCE_HOR),
 (X_MOVE << BOUNCE_VER << (WALL(0), WALL(999 + 1))).
 
-// #hylagi -p 30
+// #hylagi -p 17

@@ -1,0 +1,22 @@
+/*===================================
+a boucing ball on a stair
+statically create steps of stairs
+expects low efficiency for this model
+=====================================*/
+
+INIT_X(v) <=>   (x = 0 & x' = v).
+X_MOVE    <=> [](x'' = 0).
+INIT_Y(h) <=>   (y = h  &  y' = 0).
+FALL(g)   <=> [](y'' = -g).
+WALL(w)   <=> [](x- = w  =>  x' = -x'-).
+
+BOUNCE_ON_STEP_HOR(cornerx) <=> []( (y- = 9 - cornerx-) & (cornerx- <= x- < cornerx- + 1)  =>  (y' = -9/10 * y'-) ).
+BOUNCE_ON_STEP_VER(cornerx) <=> []( (x- = cornerx-) & (9 - cornerx- < y- <= 9 - cornerx- + 1)  =>  (x' = -x'-) ).
+BOUNCE_HOR := { BOUNCE_ON_STEP_HOR(i) | i in {0..9} }.
+BOUNCE_VER := { BOUNCE_ON_STEP_VER(i) | i in {0..9} }.
+
+INIT_X(1), INIT_Y(12),
+(FALL(9.8) << BOUNCE_HOR),
+(X_MOVE << BOUNCE_VER << (WALL(0), WALL(9 + 1))).
+
+// #hylagi -p 7
