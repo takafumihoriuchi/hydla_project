@@ -15,8 +15,8 @@ BOUNCE_ON_STEP_VER(cornerx) <=> []( (x- = cornerx-) & (99 - cornerx- < y- <= 99 
 BOUNCE_HOR := { BOUNCE_ON_STEP_HOR(i) | i in {0..99} }.
 BOUNCE_VER := { BOUNCE_ON_STEP_VER(i) | i in {0..99} }.
 
-INIT_X(3), INIT_Y(12),
+INIT_X(1), INIT_Y(12),
 (FALL(9.8) << BOUNCE_HOR),
 (X_MOVE << BOUNCE_VER << (WALL(0), WALL(99 + 1))).
 
-// #hylagi -p 16
+// #hylagi -p 7

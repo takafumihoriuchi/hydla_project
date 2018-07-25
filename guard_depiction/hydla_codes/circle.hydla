@@ -1,0 +1,15 @@
+// circle.hydla
+// bouncing ball in a circle
+
+// 初期設定
+INIT   <=>  (x = 0) & (x' = 2) & (y = -0.6) & (y' = 1).
+RUN    <=>  [](x'' = 0  &  y'' = 0).
+
+// 球面と衝突して反射する
+BOUNCE <=>  []( (x-)^2 + (y-)^2 = 1  =>
+              (x' = x'- - (x- * x'- + y- * y'-) * 2 * (x-) ) &
+              (y' = y'- - (x- * x'- + y- * y'-) * 2 * (y-) ) ).
+
+INIT, (RUN << BOUNCE).
+
+//#hylagi -p 15 --fnd
