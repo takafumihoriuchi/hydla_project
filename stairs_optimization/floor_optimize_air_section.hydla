@@ -17,7 +17,7 @@ INIT_AIR   <=> (air = 1)  & [](air' = 0).
 ABOVE_LINE <=> [](air- = 0  &  y = 1  =>  air = 1).
 BELOW_LINE <=> [](air- = 1  &  y = 1  =>  air = 0  &  sect = x).
 
-BLOCK      := {b0..b3}.
+BLOCK      := {b0..b1000}.
 SET_BLOCKS := { SET_BLOCK(BLOCK[i], i-1) | i in {1..|BLOCK|} }.
 BOUNCES    := { BOUNCE(BLOCK[i], BLOCK[i+1]) | i in {1..|BLOCK|-1} }.
 
@@ -25,4 +25,4 @@ INIT_X, X_MOVE, INIT_Y,
 SET_BLOCKS, (FALL << BOUNCES),
 ((INIT_AIR, INIT_SECT) << (ABOVE_LINE, BELOW_LINE)).
 
-// #hylagi -p 5
+// #hylagi -p 17

@@ -12,11 +12,11 @@ FALL   <=> [](y'' = -9.8).
 SET_BLOCK(bn, b) <=> (bn = b) & [](bn' = 0).
 BOUNCE(bn, bnx) <=> [](y- = 0  &  bn <= x < bnx  =>  y' = -9/10 * y'-).
 
-BLOCK := {b0..b100}.
+BLOCK := {b0..b10000}.
 SET_BLOCKS := { SET_BLOCK(BLOCK[i], i-1) | i in {1..|BLOCK|} }.
 BOUNCES := { BOUNCE(BLOCK[i], BLOCK[i+1]) | i in {1..|BLOCK|-1} }.
 
 INIT_X, INIT_Y, X_MOVE,
 SET_BLOCKS, (FALL << BOUNCES).
 
-// #hylagi -p 10
+// #hylagi -p 7

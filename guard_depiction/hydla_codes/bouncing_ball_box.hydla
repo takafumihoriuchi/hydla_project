@@ -1,15 +1,17 @@
 // bouncing_ball_box.hydla
-// bouncing particle with boxes
+// bouncing particle with boxes floating in air
 
-INIT   <=> (bx = 4/3) & (by = 20) & (bx' = 1) & (by' = 0) & []((by' = bvy) & (bx' = bvx)).
+// 初期設定
+INIT   <=> (bx = 4/3) & (by = 20) & (bx' = 1) & (by' = 0) & []( (bx' = bvx) & (by' = bvy) ).
 FALL   <=> [](bvy' = -10).
 X_MOVE <=> [](bvx' =   0).
-
 CONST  <=> [](e = 77/100).
 
-WALL(pos)  <=> [](bx- = pos => bvx = -e*bvx-).
-FLOOR(pos) <=> [](by- = pos => bvy = -e*bvy-).
+// 床・壁との衝突と反射
+WALL(pos)  <=> []((bx- = pos) => (bvx = -e*bvx-)).
+FLOOR(pos) <=> []((by- = pos) => (bvy = -e*bvy-)).
 
+// 中空に浮く箱との衝突と反射
 BOX(x1,y1,x2,y2) <=> []( ((x1 <= bx-) & (bx- <= x2) & (by- = y1 | by- = y2)
                          => bvy = -e*bvy-)
                        & ((y1 <= by-) & (by- <= y2) & (bx- = x1 | bx- = x2) 
@@ -17,4 +19,4 @@ BOX(x1,y1,x2,y2) <=> []( ((x1 <= bx-) & (bx- <= x2) & (by- = y1 | by- = y2)
 
 INIT, CONST, (FALL, X_MOVE) << (BOX(5, 6, 6, 14), BOX(1, 9/2, 4, 15), WALL(0), WALL(6), FLOOR(0)). 
 
-// #hylagi -p 20
+// #hylagi -p 19
