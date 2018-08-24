@@ -1,0 +1,8 @@
+hello
+thisisasample
+space
+will
+break
+no
+whatjusthappened???
+$$
