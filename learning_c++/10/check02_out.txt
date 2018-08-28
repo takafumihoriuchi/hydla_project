@@ -1,0 +1,5 @@
+this is a test file for check 02
+    tab is here
+    tabs are supposed to be replaced by four white spaces.
+        this is a double indent.
+and this row does not have any INDENTS!!
